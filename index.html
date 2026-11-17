@@ -123,7 +123,7 @@ G[3]=(b,win)=>{const sh={b:'<rect x="-30" y="-70" width="60" height="140" rx="8"
  let drag=0;sv.onpointerdown=e=>{const g=e.target.closest('[data-k]');if(!g||lock[g.dataset.k])return;sel=g.dataset.k;drag=1;sv.setPointerCapture(e.pointerId);draw()};
  sv.onpointermove=e=>{if(!drag)return;const p=svgPt(sv,e);P[sel].x=p.x;P[sel].y=p.y;draw()};
  sv.onpointerup=()=>{if(!drag)return;drag=0;snap()};
- const snap=()=>{const k=sel,t=T[k],p=P[k];if(!lock[k]&&Math.hypot(p.x-t[0],p.y-t[1])<22&&(k=='w'||(((p.r%360)+360)%360==0))){p.x=t[0];p.y=t[1];p.r=0;lock[k]=1;beep(900)}draw();if(Object.keys(T).every(k=>lock[k])){sv.querySelectorAll('[data-k]').forEach(g=>g.setAttribute('filter','drop-shadow(0 0 8px #A3E635)'));win()}};
+ const snap=()=>{const k=sel,t=T[k],p=P[k];if(!lock[k]&&Math.hypot(p.x-t[0],p.y-t[1])<22){p.x=t[0];p.y=t[1];p.r=0;lock[k]=1;beep(900)}draw();if(Object.keys(T).every(k=>lock[k])){sv.querySelectorAll('[data-k]').forEach(g=>g.setAttribute('filter','drop-shadow(0 0 8px #A3E635)'));win()}};
  const rot=d=>{if(lock[sel])return;P[sel].r+=d;beep(500);snap()};b.querySelector('#rl').onclick=()=>rot(-45);b.querySelector('#rr').onclick=()=>rot(45);draw()};
 // 5 Programación
 G[4]=(b,win)=>{let seq=[{t:'F'},{t:'L'}],run=0;const OB=['1,1','2,2','3,3','1,3','3,1'],D=[[0,1],[1,0],[0,-1],[-1,0]],ic=['🤖'];
